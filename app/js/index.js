@@ -1,1 +1,2 @@
-import './class/mapset'
+import 'babel-polyfill'
+import './class/generator'
