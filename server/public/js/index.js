@@ -8699,7 +8699,7 @@
 
 /***/ }),
 /* 299 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -8740,6 +8740,7 @@
 	}
 
 	{
+		// 使用 generator 创建遍历接口
 		var obj = {};
 		obj[Symbol.iterator] = regeneratorRuntime.mark(function _callee() {
 			return regeneratorRuntime.wrap(function _callee$(_context2) {
@@ -8764,30 +8765,108 @@
 				}
 			}, _callee, this);
 		});
-		var _iteratorNormalCompletion = true;
-		var _didIteratorError = false;
-		var _iteratorError = undefined;
+		/*for(let value of obj){
+	 	console.log('value',value)
+	 }*/
+	}
 
-		try {
-			for (var _iterator = obj[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-				var value = _step.value;
+	{
+		// 使用 generator 模拟前端状态机
+		var state = regeneratorRuntime.mark(function state() {
+			return regeneratorRuntime.wrap(function state$(_context3) {
+				while (1) {
+					switch (_context3.prev = _context3.next) {
+						case 0:
+							if (false) {
+								_context3.next = 9;
+								break;
+							}
 
-				console.log('value', value);
-			}
-		} catch (err) {
-			_didIteratorError = true;
-			_iteratorError = err;
-		} finally {
-			try {
-				if (!_iteratorNormalCompletion && _iterator.return) {
-					_iterator.return();
+							_context3.next = 3;
+							return 'a';
+
+						case 3:
+							_context3.next = 5;
+							return 'b';
+
+						case 5:
+							_context3.next = 7;
+							return 'c';
+
+						case 7:
+							_context3.next = 0;
+							break;
+
+						case 9:
+						case 'end':
+							return _context3.stop();
+					}
 				}
-			} finally {
-				if (_didIteratorError) {
-					throw _iteratorError;
-				}
+			}, state, this);
+		});
+		var status = state();
+		// console.log(status.next().value) // a
+		// console.log(status.next().value) // b
+		// console.log(status.next().value) // c
+		// console.log(status.next().value) // a
+		// console.log(status.next().value) // b
+		// console.log(status.next().value) // c
+		// 不断循环 
+	}
+	{
+		// 使用 async /await 模拟前端状态机 (generator 语法糖) 需要 安装 polyfill
+		/*let state = async function (){
+	 	while(1){
+	 		await 'a'
+	 		await 'b'
+	 		await 'c'
+	 	}
+	 }
+	 let status = state()
+	 console.log(status.next()) // a 
+	 // 不断循环 */
+	}
+
+	{
+		var draw = function draw(count) {
+			var RandomNum = Math.floor(Math.random() * 10);
+			if (RandomNum == 2) {
+				console.log('中奖');
+			} else {
+				console.log('谢谢参与');
 			}
-		}
+			console.log('\u5269\u4F59' + count + '\u6B21');
+		};
+
+		var residue = regeneratorRuntime.mark(function residue(count) {
+			return regeneratorRuntime.wrap(function residue$(_context4) {
+				while (1) {
+					switch (_context4.prev = _context4.next) {
+						case 0:
+							if (!(count > 0)) {
+								_context4.next = 6;
+								break;
+							}
+
+							count--;
+							_context4.next = 4;
+							return draw(count);
+
+						case 4:
+							_context4.next = 0;
+							break;
+
+						case 6:
+						case 'end':
+							return _context4.stop();
+					}
+				}
+			}, residue, this);
+		});
+		var star = residue(5);
+		document.querySelector('#star').addEventListener('click', function () {
+			star.next();
+		}, false);
 	}
 
 /***/ })
