@@ -10,7 +10,6 @@ class Interface{
 	*/
 	getOmit(issue){ // 获取遗漏 的 接口
 		let self =  this;  // Interface 类自身的引用
-		
 		return new Promise((resolve,reject)=>{  // 输出 promise 代理回调函数
 			$.ajax({
 				url:'/get/omit',  // 服务器 提供的 接口
@@ -78,7 +77,6 @@ class Interface{
 				}
 			})
 		})
-
 	}
 }
 
